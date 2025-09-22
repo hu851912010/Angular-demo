@@ -1,0 +1,15 @@
+.form-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: start;
+}
+
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field-label { font-size: 14px; color: #666; }
+.row { display: flex; gap: 16px; align-items: center; }
+
+.actions { grid-column: 1 / -1; display: flex; gap: 12px; margin-top: 8px; }
+.result { grid-column: 1 / -1; background: #111827; color: #e5e7eb; padding: 12px; border-radius: 6px; }
+
+.error { color: #d32f2f; font-size: 12px; margin-top: 4px; }
