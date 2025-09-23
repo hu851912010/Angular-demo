@@ -44,7 +44,7 @@ import { MatCardModule }      from '@angular/material/card';
 import{ Country, Ethnic} from'../../shared/models/dict.model';
 import{DictService} from'../../shared/services/dict.service';
 import { MatSelect } from '@angular/material/select';
-import { RegionValue } from '../../shared/region-selector/region-selector';
+import { RegionValue, RegionSelectorComponent } from '../../shared/region-selector/region-selector';
 @Component({
   selector: 'app-form-demo',
   standalone: true,
@@ -53,7 +53,8 @@ import { RegionValue } from '../../shared/region-selector/region-selector';
     MatFormFieldModule, MatInputModule, MatSelectModule,
     MatRadioModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule,
     MatSlideToggleModule, MatSliderModule, MatAutocompleteModule,
-    MatButtonModule, MatIconModule, MatCardModule,MatSelect
+    MatButtonModule, MatIconModule, MatCardModule, MatSelect,
+    RegionSelectorComponent
   ],
   templateUrl: './form-demo.html',
   styleUrls: ['./form-demo.scss']
