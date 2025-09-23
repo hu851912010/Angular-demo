@@ -24,6 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -59,6 +60,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+           "options": {
+          "proxyConfig": "proxy.conf.json"
+        },
           "configurations": {
             "production": {
               "buildTarget": "my-first-app:build:production"
@@ -82,6 +86,7 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -98,4 +103,5 @@
   "cli": {
     "analytics": false
   }
+
 }

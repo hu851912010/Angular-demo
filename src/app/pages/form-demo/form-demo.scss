@@ -6,7 +6,7 @@
 }
 
 .field { display: flex; flex-direction: column; gap: 8px; }
-.field-label { font-size: 14px; color: #666; }
+.field-label { font-size: 14px; color: #666; margin: 10,10; }
 .row { display: flex; gap: 16px; align-items: center; }
 
 .actions { grid-column: 1 / -1; display: flex; gap: 12px; margin-top: 8px; }

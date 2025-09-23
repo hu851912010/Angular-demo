@@ -39,7 +39,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .form-card {
   max-width: 900px;
-  margin: 40px auto;
+  margin: 80px auto;
   padding: 32px;
   border-radius: 16px;
   background: #ffffff; // 卡片背景白色
@@ -51,22 +51,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-align: center;
   font-size: 24px;
   font-weight: 600;
-  margin: 0 0 80px;         // 标题与蓝线的距离
 }
 
-.title-underline {
-  width: 100%;
-  height: 3px;
-  background: #1976d2;
-  margin: 12px auto 24px;     // 蓝线与下方内容的间距（这里控制）
-  border-radius: 2px;
-}
+
 
 
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px; // 控件之间留白更舒服
+   margin: 20px auto 80px;     // 蓝线与下方内容的间距（这里控制）
 }
 
 /* 页面整体背景色 */

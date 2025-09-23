@@ -1,0 +1,338 @@
+[
+  {
+    "code": "01",
+    "name": "汉族",
+    "name_py": "hanzu",
+    "name_py_first": "hz"
+  },
+  {
+    "code": "02",
+    "name": "蒙古族",
+    "name_py": "mengguzu",
+    "name_py_first": "mgz"
+  },
+  {
+    "code": "03",
+    "name": "回族",
+    "name_py": "huizu",
+    "name_py_first": "hz"
+  },
+  {
+    "code": "04",
+    "name": "藏族",
+    "name_py": "zangzu",
+    "name_py_first": "zz"
+  },
+  {
+    "code": "05",
+    "name": "维吾尔族",
+    "name_py": "weiwuerzu",
+    "name_py_first": "wwez"
+  },
+  {
+    "code": "06",
+    "name": "苗族",
+    "name_py": "miaozu",
+    "name_py_first": "mz"
+  },
+  {
+    "code": "07",
+    "name": "彝族",
+    "name_py": "yizu",
+    "name_py_first": "yz"
+  },
+  {
+    "code": "08",
+    "name": "壮族",
+    "name_py": "zhuangzu",
+    "name_py_first": "zz"
+  },
+  {
+    "code": "09",
+    "name": "布依族",
+    "name_py": "buyizu",
+    "name_py_first": "byz"
+  },
+  {
+    "code": "10",
+    "name": "朝鲜族",
+    "name_py": "chaoxianzu",
+    "name_py_first": "cxz"
+  },
+  {
+    "code": "11",
+    "name": "满族",
+    "name_py": "manzu",
+    "name_py_first": "mz"
+  },
+  {
+    "code": "12",
+    "name": "侗族",
+    "name_py": "dongzu",
+    "name_py_first": "dz"
+  },
+  {
+    "code": "13",
+    "name": "瑶族",
+    "name_py": "yaozu",
+    "name_py_first": "yz"
+  },
+  {
+    "code": "14",
+    "name": "白族",
+    "name_py": "baizu",
+    "name_py_first": "bz"
+  },
+  {
+    "code": "15",
+    "name": "土家族",
+    "name_py": "tujiazu",
+    "name_py_first": "tjz"
+  },
+  {
+    "code": "16",
+    "name": "哈尼族",
+    "name_py": "hanizu",
+    "name_py_first": "hnz"
+  },
+  {
+    "code": "17",
+    "name": "哈萨克族",
+    "name_py": "hasakezu",
+    "name_py_first": "hskz"
+  },
+  {
+    "code": "18",
+    "name": "傣族",
+    "name_py": "daizu",
+    "name_py_first": "dz"
+  },
+  {
+    "code": "19",
+    "name": "黎族",
+    "name_py": "lizu",
+    "name_py_first": "lz"
+  },
+  {
+    "code": "20",
+    "name": "傈僳族",
+    "name_py": "lisuzu",
+    "name_py_first": "lsz"
+  },
+  {
+    "code": "21",
+    "name": "佤族",
+    "name_py": "wazu",
+    "name_py_first": "wz"
+  },
+  {
+    "code": "22",
+    "name": "畲族",
+    "name_py": "shezu",
+    "name_py_first": "sz"
+  },
+  {
+    "code": "23",
+    "name": "高山族",
+    "name_py": "gaoshanzu",
+    "name_py_first": "gsz"
+  },
+  {
+    "code": "24",
+    "name": "拉祜族",
+    "name_py": "lahuzu",
+    "name_py_first": "lhz"
+  },
+  {
+    "code": "25",
+    "name": "水族",
+    "name_py": "shuizu",
+    "name_py_first": "sz"
+  },
+  {
+    "code": "26",
+    "name": "东乡族",
+    "name_py": "dongxiangzu",
+    "name_py_first": "dxz"
+  },
+  {
+    "code": "27",
+    "name": "纳西族",
+    "name_py": "naxizu",
+    "name_py_first": "nxz"
+  },
+  {
+    "code": "28",
+    "name": "景颇族",
+    "name_py": "jingpozu",
+    "name_py_first": "jpz"
+  },
+  {
+    "code": "29",
+    "name": "柯尔克孜族",
+    "name_py": "keerkezizu",
+    "name_py_first": "kekzz"
+  },
+  {
+    "code": "30",
+    "name": "土族",
+    "name_py": "tuzu",
+    "name_py_first": "tz"
+  },
+  {
+    "code": "31",
+    "name": "达斡尔族",
+    "name_py": "dawoerzu",
+    "name_py_first": "dwerz"
+  },
+  {
+    "code": "32",
+    "name": "仫佬族",
+    "name_py": "mulaozu",
+    "name_py_first": "mlz"
+  },
+  {
+    "code": "33",
+    "name": "羌族",
+    "name_py": "qiangzu",
+    "name_py_first": "qz"
+  },
+  {
+    "code": "34",
+    "name": "布朗族",
+    "name_py": "bulangzu",
+    "name_py_first": "blz"
+  },
+  {
+    "code": "35",
+    "name": "撒拉族",
+    "name_py": "salazu",
+    "name_py_first": "slz"
+  },
+  {
+    "code": "36",
+    "name": "毛南族",
+    "name_py": "maonanzu",
+    "name_py_first": "mnz"
+  },
+  {
+    "code": "37",
+    "name": "仡佬族",
+    "name_py": "gelaozu",
+    "name_py_first": "glz"
+  },
+  {
+    "code": "38",
+    "name": "锡伯族",
+    "name_py": "xibozu",
+    "name_py_first": "xbz"
+  },
+  {
+    "code": "39",
+    "name": "阿昌族",
+    "name_py": "achangzu",
+    "name_py_first": "acz"
+  },
+  {
+    "code": "40",
+    "name": "普米族",
+    "name_py": "pumizu",
+    "name_py_first": "pmz"
+  },
+  {
+    "code": "41",
+    "name": "塔吉克族",
+    "name_py": "tajikezu",
+    "name_py_first": "tjkz"
+  },
+  {
+    "code": "42",
+    "name": "怒族",
+    "name_py": "nuzu",
+    "name_py_first": "nz"
+  },
+  {
+    "code": "43",
+    "name": "乌孜别克族",
+    "name_py": "wuzibiekezu",
+    "name_py_first": "wzbkz"
+  },
+  {
+    "code": "44",
+    "name": "俄罗斯族",
+    "name_py": "eluosizu",
+    "name_py_first": "elsz"
+  },
+  {
+    "code": "45",
+    "name": "鄂温克族",
+    "name_py": "ewenkezu",
+    "name_py_first": "ewkz"
+  },
+  {
+    "code": "46",
+    "name": "德昂族",
+    "name_py": "deangzu",
+    "name_py_first": "daz"
+  },
+  {
+    "code": "47",
+    "name": "保安族",
+    "name_py": "baoanzu",
+    "name_py_first": "baz"
+  },
+  {
+    "code": "48",
+    "name": "裕固族",
+    "name_py": "yuguzu",
+    "name_py_first": "ygz"
+  },
+  {
+    "code": "49",
+    "name": "京族",
+    "name_py": "jingzu",
+    "name_py_first": "jz"
+  },
+  {
+    "code": "50",
+    "name": "塔塔尔族",
+    "name_py": "tataerzu",
+    "name_py_first": "tterz"
+  },
+  {
+    "code": "51",
+    "name": "独龙族",
+    "name_py": "dulongzu",
+    "name_py_first": "dlz"
+  },
+  {
+    "code": "52",
+    "name": "鄂伦春族",
+    "name_py": "elunchunzu",
+    "name_py_first": "elcz"
+  },
+  {
+    "code": "53",
+    "name": "赫哲族",
+    "name_py": "hezhezu",
+    "name_py_first": "hzz"
+  },
+  {
+    "code": "54",
+    "name": "门巴族",
+    "name_py": "menbazu",
+    "name_py_first": "mbz"
+  },
+  {
+    "code": "55",
+    "name": "珞巴族",
+    "name_py": "luobazu",
+    "name_py_first": "lbz"
+  },
+  {
+    "code": "56",
+    "name": "基诺族",
+    "name_py": "jinuozu",
+    "name_py_first": "jnz"
+  }
+]
