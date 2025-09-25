@@ -254,17 +254,21 @@ $text-muted: #5c6b7c;
           margin: 0;
         }
 
-        mat-icon[matListIcon] {
-          color: $primary-color;
-          background: rgba(25, 118, 210, 0.08);
-          border-radius: 14px;
-          min-width: 44px;
-          min-height: 44px;
+        .icon-wrap {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-size: 22px;
+          width: 46px;
+          height: 46px;
+          border-radius: 16px;
+          background: rgba(25, 118, 210, 0.08);
+          color: $primary-color;
+          flex-shrink: 0;
           transition: background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease;
+
+          mat-icon {
+            font-size: 22px;
+          }
         }
 
         .description {
@@ -294,6 +298,12 @@ $text-muted: #5c6b7c;
 
           .description {
             color: color.adjust($text-muted, $lightness: -8%);
+          }
+
+          .icon-wrap {
+            background: rgba(25, 118, 210, 0.16);
+            color: $secondary-color;
+            box-shadow: 0 6px 14px rgba(25, 118, 210, 0.18);
           }
 
           .chevron {

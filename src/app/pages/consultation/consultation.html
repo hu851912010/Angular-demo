@@ -70,7 +70,9 @@
             (click)="openFeature(feature)"
             [class.active]="isFeatureActive(feature)"
           >
-            <mat-icon matListIcon>{{ feature.icon }}</mat-icon>
+            <span matListItemIcon class="icon-wrap">
+              <mat-icon>{{ feature.icon }}</mat-icon>
+            </span>
             <div class="text-group">
               <div matLine class="title">{{ feature.title }}</div>
               <p matLine class="description">{{ feature.description }}</p>
