@@ -104,7 +104,7 @@ export class EthnicSelectorComponent implements ControlValueAccessor, Validator 
     this.inputCtrl.valueChanges.pipe(startWith(''))
   ]).pipe(
     map(([list, keyword]) => {
-      const kw = keyword.trim().toLowerCase();
+      const kw = this.normalizeKeyword(keyword);
       if (!kw) {
         return list;
       }
@@ -146,7 +146,7 @@ export class EthnicSelectorComponent implements ControlValueAccessor, Validator 
   handleBlur() {
     this.touched.set(true);
     this.onTouched();
-    const txt = this.inputCtrl.value.trim();
+    const txt = this.normalizeKeyword(this.inputCtrl.value, false);
     if (!txt) {
       if (this.required) {
         this.value = null;
@@ -231,6 +231,17 @@ export class EthnicSelectorComponent implements ControlValueAccessor, Validator 
       const first = item.name_py_first?.trim().toLowerCase() ?? '';
       return kw === name || kw === full || kw === first;
     });
+  }
+
+  private normalizeKeyword(value: unknown, shouldLowercase = true): string {
+    const raw =
+      typeof value === 'string'
+        ? value
+        : value && typeof value === 'object'
+          ? this.displayEthnic(value as Ethnic)
+          : '';
+    const trimmed = raw.trim();
+    return shouldLowercase ? trimmed.toLowerCase() : trimmed;
   }
 
   private notifyChange() {
