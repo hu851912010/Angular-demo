@@ -196,13 +196,38 @@ $text-muted: #5c6b7c;
         margin: 6px 0;
         padding: 12px;
         min-height: 64px;
-        transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        transition:
+          background 0.25s ease,
+          box-shadow 0.25s ease,
+          transform 0.25s ease;
         overflow: hidden;
+        z-index: 0;
+
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          background: rgba(25, 118, 210, 0.05);
+          transition: inherit;
+          z-index: -1;
+        }
+
 
         .mdc-list-item__content {
           display: flex;
           align-items: center;
           gap: 12px;
+
+          position: relative;
+          z-index: 1;
+        }
+
+        div[matLine] {
+          font-weight: 600;
+          color: #1b3144;
+          transition: color 0.2s ease;
+
         }
 
         .mat-mdc-list-item-meta,
@@ -217,6 +242,15 @@ $text-muted: #5c6b7c;
 
         mat-icon[matListIcon] {
           color: $primary-color;
+          background: rgba(25, 118, 210, 0.08);
+          border-radius: 14px;
+          min-width: 40px;
+          min-height: 40px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 22px;
+          transition: background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease;
         }
 
         .description {
@@ -232,12 +266,41 @@ $text-muted: #5c6b7c;
         &.active,
         &:hover,
         &:focus {
-          background: rgba(25, 118, 210, 0.12);
-          box-shadow: inset 3px 0 0 $primary-color;
-          transform: translateX(2px);
+
+          transform: translateX(4px);
+
+          &::before {
+            background: linear-gradient(135deg, rgba(25, 118, 210, 0.18), rgba(25, 118, 210, 0.32));
+            box-shadow: 0 12px 28px rgba(17, 71, 128, 0.18);
+          }
+
+          div[matLine] {
+            color: $secondary-color;
+          }
 
           .description {
-            color: darken($text-muted, 8%);
+            color: darken($text-muted, 10%);
+          }
+
+          mat-icon[matListIcon] {
+            background: linear-gradient(135deg, rgba(31, 111, 187, 1), rgba(55, 168, 255, 1));
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(17, 71, 128, 0.22);
+          }
+
+          .chevron {
+            color: $primary-color;
+          }
+        }
+
+        &.active {
+          &::before {
+            box-shadow: 0 16px 34px rgba(17, 71, 128, 0.24);
+          }
+
+          .chevron {
+            transform: translateX(2px);
+
           }
         }
       }
