@@ -207,32 +207,21 @@ $text-muted: #5c6b7c;
         overflow: hidden;
         z-index: 0;
 
-        &::before,
-        &::after {
+        &::before {
           content: "";
           position: absolute;
           inset: 0;
           border-radius: inherit;
           transition: inherit;
           pointer-events: none;
-        }
-
-        &::before {
           background: rgba(25, 118, 210, 0.03);
           z-index: -2;
         }
 
-        &::after {
-          inset: -1px;
-          border-radius: inherit;
-          background: linear-gradient(135deg, rgba(31, 111, 187, 0), rgba(55, 168, 255, 0));
-          opacity: 0;
-          z-index: -1;
-        }
-
         .mdc-list-item__content {
           display: flex;
-          align-items: flex-start;
+          flex-direction: row;
+          align-items: center;
           gap: 14px;
           position: relative;
           z-index: 1;
@@ -243,6 +232,7 @@ $text-muted: #5c6b7c;
           flex-direction: column;
           gap: 4px;
           align-items: flex-start;
+          flex: 1 1 auto;
         }
 
         div[matLine].title {
@@ -294,18 +284,9 @@ $text-muted: #5c6b7c;
         &.active,
         &:hover,
         &:focus {
-          border-color: rgba(25, 118, 210, 0.35);
+          border-color: rgba(25, 118, 210, 0.55);
+          box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.14);
           transform: translateX(4px);
-
-          &::before {
-            background: linear-gradient(135deg, rgba(25, 118, 210, 0.18), rgba(25, 118, 210, 0.32));
-            box-shadow: 0 12px 28px rgba(17, 71, 128, 0.18);
-          }
-
-          &::after {
-            opacity: 1;
-            background: linear-gradient(135deg, rgba(31, 111, 187, 0.45), rgba(55, 168, 255, 0.6));
-          }
 
           div[matLine].title {
             color: $secondary-color;
@@ -315,27 +296,14 @@ $text-muted: #5c6b7c;
             color: color.adjust($text-muted, $lightness: -8%);
           }
 
-          mat-icon[matListIcon] {
-            background: linear-gradient(135deg, rgba(31, 111, 187, 1), rgba(55, 168, 255, 1));
-            color: #fff;
-            box-shadow: 0 10px 20px rgba(17, 71, 128, 0.22);
-          }
-
           .chevron {
             color: $primary-color;
           }
         }
 
         &.active {
-          border-color: rgba(25, 118, 210, 0.55);
-
-          &::before {
-            box-shadow: 0 20px 40px rgba(17, 71, 128, 0.22);
-          }
-
-          &::after {
-            background: linear-gradient(135deg, rgba(31, 111, 187, 0.65), rgba(55, 168, 255, 0.85));
-          }
+          border-color: rgba(25, 118, 210, 0.7);
+          box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.22);
 
           .chevron {
             transform: translateX(2px);
