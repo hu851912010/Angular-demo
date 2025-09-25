@@ -27,7 +27,6 @@ import type { Ethnic } from '../models/dict.model';
   template: `
     <mat-form-field appearance="outline" class="selector-field" color="primary">
       <mat-label>{{ label }}</mat-label>
-      <mat-icon matPrefix class="prefix-icon">diversity_3</mat-icon>
       <input
         matInput
         [formControl]="inputCtrl"
@@ -59,8 +58,6 @@ import type { Ethnic } from '../models/dict.model';
           <mat-option [value]="ethnic">
             <div class="option-line">
               <span class="option-name">{{ ethnic.name }}</span>
-              <span class="option-code">{{ ethnic.code }}</span>
-              <span class="option-en">{{ ethnic.name_py_first }}</span>
             </div>
           </mat-option>
         } @empty {
@@ -71,13 +68,7 @@ import type { Ethnic } from '../models/dict.model';
   `,
   styles: [
     `:host { display: block; }`,
-    `.selector-field { width: 100%; background: linear-gradient(135deg, rgba(76, 175, 80, 0.08), rgba(0, 150, 136, 0.05)); border-radius: 12px; padding: 4px 8px; }`,
-    `.prefix-icon { color: #2e7d32; margin-right: 4px; }`,
-    `.option-line { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; }`,
-    `.option-name { font-weight: 600; color: #374151; }`,
-    `.option-code { font-family: 'Roboto Mono', monospace; color: #26a69a; }`,
-    `.option-en { color: #6b7280; font-size: 12px; }
-  `],
+    `.selector-field { width: 100%}`],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => EthnicSelectorComponent), multi: true },

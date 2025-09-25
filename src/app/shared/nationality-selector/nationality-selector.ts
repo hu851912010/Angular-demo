@@ -27,7 +27,6 @@ import type { Country } from '../models/dict.model';
   template: `
     <mat-form-field appearance="outline" class="selector-field" color="primary">
       <mat-label>{{ label }}</mat-label>
-      <mat-icon matPrefix class="prefix-icon">public</mat-icon>
       <input
         matInput
         [formControl]="inputCtrl"
@@ -58,8 +57,7 @@ import type { Country } from '../models/dict.model';
         @for (country of filteredCountries$ | async; track country.code) {
           <mat-option [value]="country">
             <div class="option-line">
-              <span class="option-name">{{ country.name_cn }}</span>
-              <span class="option-code">{{ country.code }}</span>
+              <span class="option-name">{{ country.name_cn }}</span>-
               <span class="option-en">{{ country.name_en }}</span>
             </div>
           </mat-option>
@@ -71,12 +69,9 @@ import type { Country } from '../models/dict.model';
   `,
   styles: [
     `:host { display: block; }`,
-    `.selector-field { width: 100%; background: linear-gradient(135deg, rgba(33, 150, 243, 0.08), rgba(156, 39, 176, 0.05)); border-radius: 12px; padding: 4px 8px; }`,
-    `.prefix-icon { color: #1976d2; margin-right: 4px; }`,
-    `.option-line { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; }`,
-    `.option-name { font-weight: 600; color: #374151; }`,
-    `.option-code { font-family: 'Roboto Mono', monospace; color: #5c6bc0; }`,
-    `.option-en { color: #6b7280; font-size: 12px; }`
+    `.selector-field { width: 100%; }`,
+    `.prefix-icon { color: rgba(0, 0, 0, 0.54); }`,
+
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [

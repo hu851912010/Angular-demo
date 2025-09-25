@@ -28,17 +28,18 @@
     label="国籍"
     placeholder="输入中文、英文或国家代码"
   ></app-nationality-selector>
-    <!-- 直接绑定到 formControlName="region" -->
-    <app-region-selector
-      formControlName="region"
-      [required]="true">               <!-- 交给子组件做“至少选省”的必填校验 -->
-    </app-region-selector>
-  <app-ethnic-selector
+    <app-ethnic-selector
     formControlName="ethnic"
     [required]="true"
     label="民族"
     placeholder="请输入民族或拼音"
   ></app-ethnic-selector>
+    <!-- 直接绑定到 formControlName="region" -->
+    <app-region-selector
+      formControlName="region"
+      [required]="true">               <!-- 交给子组件做“至少选省”的必填校验 -->
+    </app-region-selector>
+
   <!-- 下拉选择：科室 -->
   <mat-form-field appearance="outline">
     <mat-label>科室</mat-label>
