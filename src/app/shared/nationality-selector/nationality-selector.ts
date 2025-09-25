@@ -104,7 +104,7 @@ export class NationalitySelectorComponent implements ControlValueAccessor, Valid
     this.inputCtrl.valueChanges.pipe(startWith(''))
   ]).pipe(
     map(([list, keyword]) => {
-      const kw = keyword.trim().toLowerCase();
+      const kw = this.normalizeKeyword(keyword);
       if (!kw) {
         return list;
       }
@@ -152,7 +152,7 @@ export class NationalitySelectorComponent implements ControlValueAccessor, Valid
   handleBlur() {
     this.touched.set(true);
     this.onTouched();
-    const txt = this.inputCtrl.value.trim();
+    const txt = this.normalizeKeyword(this.inputCtrl.value, false);
     if (!txt) {
       if (this.required) {
         this.value = null;
@@ -238,6 +238,17 @@ export class NationalitySelectorComponent implements ControlValueAccessor, Valid
       const py = country.name_py_first?.trim().toLowerCase() ?? '';
       return kw === nameCn || kw === nameEn || kw === code || kw === py;
     });
+  }
+
+  private normalizeKeyword(value: unknown, shouldLowercase = true): string {
+    const raw =
+      typeof value === 'string'
+        ? value
+        : value && typeof value === 'object'
+          ? this.displayCountry(value as Country)
+          : '';
+    const trimmed = raw.trim();
+    return shouldLowercase ? trimmed.toLowerCase() : trimmed;
   }
 
   private notifyChange() {
