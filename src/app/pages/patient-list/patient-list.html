@@ -1,0 +1,76 @@
+<section class="patient-page">
+  <header class="page-header">
+    <div class="title-block">
+      <h1>患者信息</h1>
+      <p class="subtitle">查看当前候诊患者并快速进入看诊流程</p>
+    </div>
+    <button mat-raised-button color="primary" class="quick-register" (click)="navigateToRegistration()">
+      <mat-icon>playlist_add</mat-icon>
+      快速挂号
+    </button>
+  </header>
+
+  <mat-card class="patient-card">
+    <div class="card-toolbar">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>搜索患者姓名 / 卡号 / 科室 / 医生</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput type="search" placeholder="请输入关键字" [(ngModel)]="searchTerm" />
+        <button *ngIf="searchTerm" mat-icon-button matSuffix aria-label="清除" (click)="searchTerm = ''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="patient-table">
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>就诊科室</th>
+            <th>主诊医生</th>
+            <th>状态</th>
+            <th>标签</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let patient of filteredPatients"
+            (dblclick)="openConsultation(patient)"
+            class="patient-row"
+            tabindex="0"
+          >
+            <td>
+              <div class="name-cell">
+                <span class="name">{{ patient.name }}</span>
+                <span class="id">{{ patient.id }}</span>
+              </div>
+            </td>
+            <td>{{ patient.gender }}</td>
+            <td>{{ patient.age }}</td>
+            <td>{{ patient.dept }}</td>
+            <td>{{ patient.doctor }}</td>
+            <td>
+              <span class="status" [ngClass]="patient.status">{{ patient.status }}</span>
+            </td>
+            <td>
+              <div class="tag-list">
+                <span *ngFor="let tag of patient.tags" class="tag">{{ tag }}</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="empty" *ngIf="filteredPatients.length === 0">
+        <mat-icon>sentiment_dissatisfied</mat-icon>
+        <p>未找到符合条件的患者</p>
+      </div>
+    </div>
+
+    <footer class="card-footer">
+      <p>双击患者行可快速进入看诊页面。</p>
+    </footer>
+  </mat-card>
+</section>

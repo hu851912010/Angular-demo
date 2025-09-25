@@ -1,0 +1,179 @@
+<section class="consultation-page" *ngIf="patient as current">
+  <header class="page-header">
+    <button mat-stroked-button class="back-button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      返回患者列表
+    </button>
+    <div class="header-info">
+      <h1>{{ current.name }}的看诊工作台</h1>
+      <p class="subtitle">请在左侧选择功能，右侧查看或录入详细信息</p>
+    </div>
+  </header>
+
+  <section class="workspace">
+    <aside class="left-panel">
+      <mat-card class="patient-card">
+        <div class="card-header">
+          <div class="avatar">
+            <span>{{ current.name[0] }}</span>
+          </div>
+          <div class="identity">
+            <h2>{{ current.name }}</h2>
+            <p class="meta">{{ current.gender }} · {{ current.age }}岁</p>
+            <p class="id">卡号：{{ current.id }}</p>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <dl class="card-info">
+          <div>
+            <dt>就诊科室</dt>
+            <dd>{{ current.dept }}</dd>
+          </div>
+          <div>
+            <dt>主诊医生</dt>
+            <dd>{{ current.doctor }}</dd>
+          </div>
+          <div>
+            <dt>到诊时间</dt>
+            <dd>{{ current.visitTime }}</dd>
+          </div>
+          <div>
+            <dt>当前状态</dt>
+            <dd><span class="status">{{ current.status }}</span></dd>
+          </div>
+          <div>
+            <dt>过敏史</dt>
+            <dd>{{ current.allergies }}</dd>
+          </div>
+        </dl>
+
+        <mat-divider></mat-divider>
+
+        <div class="tag-container">
+          <span class="tag" *ngFor="let tag of current.tags">{{ tag }}</span>
+        </div>
+
+        <div class="notes">
+          <h3>就诊提示</h3>
+          <p>{{ current.notes }}</p>
+        </div>
+      </mat-card>
+
+      <nav class="feature-nav">
+        <h3>功能导航</h3>
+        <mat-nav-list>
+          <a
+            mat-list-item
+            *ngFor="let feature of features"
+            (click)="openFeature(feature)"
+            [class.active]="isFeatureActive(feature)"
+          >
+            <mat-icon matListIcon>{{ feature.icon }}</mat-icon>
+            <div matLine>{{ feature.title }}</div>
+            <p matLine class="description">{{ feature.description }}</p>
+            <mat-icon class="chevron">chevron_right</mat-icon>
+          </a>
+        </mat-nav-list>
+      </nav>
+    </aside>
+
+    <section class="right-panel">
+      <mat-card class="tab-shell">
+        <mat-tab-group
+          [selectedIndex]="activeTabIndex"
+          (selectedIndexChange)="activeTabIndex = $event"
+          animationDuration="250ms"
+        >
+          <mat-tab *ngFor="let tab of openTabs; let index = index">
+            <ng-template mat-tab-label>
+              <mat-icon>{{ tab.icon }}</mat-icon>
+              <span>{{ tab.title }}</span>
+              <button
+                mat-icon-button
+                type="button"
+                class="close"
+                (click)="closeTab(index, $event)"
+                [disabled]="openTabs.length === 1"
+                matTooltip="关闭"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </ng-template>
+
+            <div class="tab-content" [ngSwitch]="tab.id">
+              <div *ngSwitchCase="'diagnosis'" class="diagnosis">
+                <h3>初步诊断记录</h3>
+                <div class="grid">
+                  <div class="field">
+                    <label>主诉</label>
+                    <textarea rows="3" placeholder="请输入患者主诉信息"></textarea>
+                  </div>
+                  <div class="field">
+                    <label>既往史</label>
+                    <textarea rows="3" placeholder="填写既往病史、手术史"></textarea>
+                  </div>
+                  <div class="field full">
+                    <label>诊断结论</label>
+                    <textarea rows="4" placeholder="诊断评估与处理计划"></textarea>
+                  </div>
+                </div>
+                <div class="action-bar">
+                  <button mat-stroked-button color="primary">保存诊断</button>
+                  <button mat-flat-button color="primary">提交并同步</button>
+                </div>
+              </div>
+
+              <div *ngSwitchCase="'orders'" class="orders">
+                <h3>医嘱与处方</h3>
+                <div class="placeholder">
+                  <mat-icon>medication</mat-icon>
+                  <p>添加药品或检查项目，系统将自动校验冲突并生成医嘱清单。</p>
+                  <button mat-raised-button color="primary">新增处方</button>
+                </div>
+              </div>
+
+              <div *ngSwitchCase="'records'" class="records">
+                <h3>电子病历</h3>
+                <ul>
+                  <li>
+                    <span class="label">体格检查</span>
+                    <p>生命体征稳定，建议持续监测血压与血糖。</p>
+                  </li>
+                  <li>
+                    <span class="label">辅助检查</span>
+                    <p>建议安排心电图与血常规，排查心肌缺血风险。</p>
+                  </li>
+                </ul>
+              </div>
+
+              <div *ngSwitchCase="'certificate'" class="certificate">
+                <h3>疾病证明</h3>
+                <div class="placeholder">
+                  <mat-icon>verified</mat-icon>
+                  <p>根据诊断信息生成疾病证明或休假建议。</p>
+                  <button mat-raised-button color="primary">生成证明</button>
+                </div>
+              </div>
+
+              <div *ngSwitchCase="'consent'" class="consent">
+                <h3>知情同意书</h3>
+                <div class="placeholder">
+                  <mat-icon>assignment_turned_in</mat-icon>
+                  <p>向患者解释诊疗风险与注意事项，签署知情同意书。</p>
+                  <button mat-raised-button color="primary">发起签署</button>
+                </div>
+              </div>
+
+              <div *ngSwitchDefault class="empty">
+                <mat-icon>info</mat-icon>
+                <p>{{ getTabDescription(tab.id) }}</p>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </section>
+  </section>
+</section>
