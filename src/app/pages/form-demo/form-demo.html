@@ -2,8 +2,7 @@
  
 
 <mat-card class="form-card">
-  <mat-card-title class="form-title">表单学习页面</mat-card-title>
-  <!-- <div class="title-underline"></div> 独立的蓝线，更好控间距 -->
+  <mat-card-title class="form-title">快速挂号</mat-card-title>
   <mat-card-content>
 <form [formGroup]="form" (ngSubmit)="submit()" class="form-grid">
 
@@ -51,26 +50,11 @@
     }
   </mat-autocomplete>
 </mat-form-field>
-  <div>
-    <label class="mb-1 block font-medium">居住地（省 / 市 / 区县）</label>
-
     <!-- 直接绑定到 formControlName="region" -->
     <app-region-selector
       formControlName="region"
       [required]="true">               <!-- 交给子组件做“至少选省”的必填校验 -->
     </app-region-selector>
-
-    <!-- 校验提示（既支持父控件 required，也支持子组件的 validate()） -->
-    <div class="text-red-600 text-sm mt-1"
-         *ngIf="form.get('region')?.invalid && form.get('region')?.touched">
-      请选择至少省份（建议选到区县）
-    </div>
-
-    <!-- 选中值预览（可选） -->
-    <div class="text-gray-600 text-sm mt-1" *ngIf="form.value.region as r">
-      已选代码：{{ r.provinceCode }}{{ r.cityCode ? ' / ' + r.cityCode : '' }}{{ r.countyCode ? ' / ' + r.countyCode : '' }}
-    </div>
-  </div>
 <mat-form-field appearance="outline">
   
  <mat-label>民族</mat-label>
@@ -132,10 +116,10 @@
       type="text"
       matInput
       formControlName="tags"
-      [matAutocomplete]="auto"
+      [matAutocomplete]="autoTag"
       placeholder="输入关键字试试：糖/高/过敏/..."
     >
-    <mat-autocomplete #auto="matAutocomplete">
+    <mat-autocomplete #autoTag="matAutocomplete">
       <mat-option *ngFor="let opt of tagOptions"
                   [value]="opt">
         {{ opt }}

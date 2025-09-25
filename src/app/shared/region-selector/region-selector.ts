@@ -6,26 +6,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { of, defer, from } from 'rxjs';
 import { startWith, switchMap, tap, shareReplay, map } from 'rxjs/operators';
-import { RegionRepository } from '../services/region.repository';
+import { RegionSyncService } from'../services/region.sync.service';
 import type { Region as DbRegion } from '../db/his-db'; 
-export interface RegionValue {
-  provinceCode: string;
-  cityCode?: string;
-  countyCode?: string;
-}
-
-//ype Region = { code: string; name: string; parent: string; level: string };
+import type { RegionValue } from '../models/region.model';
+export { RegionValue };
 
 @Component({
   selector: 'app-region-selector',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatSelectModule],
   template: `
-  <div [formGroup]="form" class="grid gap-3">
+  <div [formGroup]="form" class="contents">
     <!-- 省 -->
     <mat-form-field appearance="outline" class="w-full">
+       <mat-label>居住地-省</mat-label>
       <mat-select placeholder="请选择省" formControlName="province">
-        <mat-option value="">-- 请选择 --</mat-option>
+
         <mat-option *ngFor="let p of provinces$ | async; trackBy: trackByCode" [value]="p.code">
           {{ p.name }}
         </mat-option>
@@ -34,8 +30,8 @@ export interface RegionValue {
 
     <!-- 市 -->
     <mat-form-field appearance="outline" class="w-full">
-      <mat-select placeholder="请选择市" formControlName="city" [disabled]="!(cities$ | async)?.length">
-        <mat-option value="">-- 请选择 --</mat-option>
+          <mat-label>居住地-市</mat-label>
+      <mat-select placeholder="请选择市" formControlName="city">
         <mat-option *ngFor="let c of cities$ | async; trackBy: trackByCode" [value]="c.code">
           {{ c.name }}
         </mat-option>
@@ -45,8 +41,8 @@ export interface RegionValue {
     <!-- 区/县 -->
     <ng-container *ngIf="showCounty">
       <mat-form-field appearance="outline" class="w-full">
-        <mat-select placeholder="请选择区县" formControlName="county" [disabled]="!(counties$ | async)?.length">
-          <mat-option value="">-- 请选择 --</mat-option>
+            <mat-label>居住地-区/县</mat-label>
+        <mat-select placeholder="请选择区/县" formControlName="county" >
           <mat-option *ngFor="let d of counties$ | async; trackBy: trackByCode" [value]="d.code">
             {{ d.name }}
           </mat-option>
@@ -55,7 +51,7 @@ export interface RegionValue {
     </ng-container>
   </div>
   `,
-  styles: [`.w-full{width:100%}`],
+  styles: [`.w-full{width:100%}`,`.contents{display: contents}`,':host { display: contents; }'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => RegionSelectorComponent), multi: true },
@@ -65,8 +61,10 @@ export interface RegionValue {
 export class RegionSelectorComponent implements ControlValueAccessor, Validator {
   @Input() showCounty = true;
   @Input() required = false;
-
-  private repo = inject(RegionRepository);
+@Input() provincePlaceholder = '省';
+@Input() cityPlaceholder = '市';
+@Input() countyPlaceholder = '县';
+  private repo = inject(RegionSyncService);
   private fb = inject(NonNullableFormBuilder);
 
   form = this.fb.group({
@@ -76,14 +74,14 @@ export class RegionSelectorComponent implements ControlValueAccessor, Validator 
   });
 
   // 省列表：一次性加载并缓存
-  provinces$ = defer(() => from(this.repo.getProvinces())).pipe(shareReplay(1));
+  provinces$ = this.repo.loadChildren$('').pipe(shareReplay(1));
 
   // 市列表：根据省变更加载
   cities$ = this.form.controls.province.valueChanges.pipe(
     startWith(this.form.controls.province.value),
     tap(() => this.form.controls.city.setValue('', { emitEvent: false })),    // 级联重置
     tap(() => this.form.controls.county.setValue('', { emitEvent: false })),
-    switchMap(code => code ? from(this.repo.getChildren(code)) : of([] as DbRegion [])),
+    switchMap(code => code ? from(this.repo.loadChildren$(code)) : of([] as DbRegion [])),
     shareReplay(1)
   );
 
@@ -91,7 +89,7 @@ export class RegionSelectorComponent implements ControlValueAccessor, Validator 
   counties$ = this.form.controls.city.valueChanges.pipe(
     startWith(this.form.controls.city.value),
     tap(() => this.form.controls.county.setValue('', { emitEvent: false })),
-    switchMap(code => (this.showCounty && code) ? from(this.repo.getChildren(code)) : of([] as DbRegion[])),
+    switchMap(code => (this.showCounty && code) ? from(this.repo.loadChildren$(code)) : of([] as DbRegion[])),
     shareReplay(1)
   );
 

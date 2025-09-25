@@ -12,14 +12,20 @@ export class RegionRepository {
 
   // 取省份（parent 为空或 '000000'）
   getProvinces() {
-    return db.regions.where('parent').anyOf('', '000000').toArray(); // ✅ 不再传 undefined
+    db.regions.where('parentCode').anyOf('', '000000').toArray().then(rows => {
+});
+    return db.regions.where('parentCode').anyOf('', '000000').toArray(); // ✅ 不再传 undefined
   }
 
   // 取某父级的下级（市/区）
   getChildren(parentCode: string) {
     // 防御：避免把 ''/undefined 传进 equals
-    if (!parentCode) throw new Error('parentCode is required');
-    return db.regions.where('parent').equals(parentCode).toArray();
+  parentCode= parentCode ?? '';
+ db.regions.toArray().then(rows => {
+  console.log('regions data:', rows);
+});
+
+    return db.regions.where('parentCode').equals(parentCode).toArray();
   }
 
   // 搜索（按名称前缀）

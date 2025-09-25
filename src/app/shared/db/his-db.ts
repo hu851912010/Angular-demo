@@ -10,11 +10,13 @@ export interface Region {
 export class HISDB extends Dexie {
   regions!: Table<Region, string>;  // 主键 code
   constructor() {
+    
     super('his-db');
     this.version(1).stores({
       // 索引：按 parent 查询子级、按 name/updatedAt 检索
-      regions: 'code, parent, name, updatedAt'
-    });
+      regions: 'code, parentCode, name, updatedAt'
+    })
+    ;
   }
 }
 export const db = new HISDB();

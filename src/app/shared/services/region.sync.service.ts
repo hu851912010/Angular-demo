@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, of, firstValueFrom } from 'rxjs';
+import { catchError, of, firstValueFrom,Observable, defer, from  } from 'rxjs';
 import { RegionRepository } from './region.repository';
-
+import { Region } from '../db/his-db';
+import { startWith, switchMap, tap, shareReplay, map } from 'rxjs/operators';
 type RegionDto = { code: string; name: string; parentCode?: string; level?: string };
 
 @Injectable({ providedIn: 'root' })
@@ -33,27 +34,30 @@ export class RegionSyncService {
     );
   }
 
-  // 按需加载某父级的子级（市/区）
-  async ensureChildren(parentCode: string) {
-    if (!parentCode) throw new Error('parentCode is required');
-  const local = await this.repo.getChildren(parentCode);
-  if (local.length > 0) return;  // 本地已有子级就不拉远程
-    const children = await firstValueFrom(
-      this.http.get<RegionDto[]>(this.apiurl, { params: { parent: parentCode } })
-        .pipe(
-          catchError(() => of([] as RegionDto[])) // ← 同样兜底为空数组
-        )
-    );
+  loadChildren$(parentCode: string): Observable<Region[]> {
+   parentCode = parentCode ?? '';
+  // 先读本地，无则拉远端并回写，再返回
+  return defer(() => this.repo.getChildren(parentCode)).pipe(
+    switchMap(local => {
+      if (local.length > 0) return of(local);
 
-    if (!children.length) return;
-    await this.repo.upsertRegions(
-      children.map(c => ({
-        code: c.code,
-        name: c.name,
-        parentCode: parentCode,            // 子级的 parent 固定为调用入参
-        level: c.level ?? undefined,   // 有就带上
-        updatedAt: Date.now(),
-      }))
-    );
-  }
+      return this.http.get<RegionDto[]>(this.apiurl, { params: { parentCode: parentCode } }).pipe(
+        catchError(() => of([] as RegionDto[])),
+        tap(children => {
+          if (children.length) {
+            this.repo.upsertRegions(children.map(c => ({
+              code: c.code,
+              name: c.name,
+              parentCode,
+              level: c.level ?? undefined,
+              updatedAt: Date.now(),
+            })));
+          }
+        }),
+        map(children => children as Region[]) // 保持返回 Region[]
+      );
+    })
+  );
+}
+
 }
