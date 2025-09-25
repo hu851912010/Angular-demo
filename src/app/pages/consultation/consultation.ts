@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -8,6 +8,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 interface PatientDetail {
   id: string;
@@ -32,6 +34,17 @@ interface ConsultationFeature {
 
 type FeatureKey = 'diagnosis' | 'orders' | 'records' | 'certificate' | 'consent';
 
+type ActionKey = 'followup' | 'referral' | 'finish' | 'history' | 'print';
+
+interface ConsultationAction {
+  id: ActionKey;
+  title: string;
+  icon: string;
+  description: string;
+  highlights: string[];
+  primaryText: string;
+}
+
 @Component({
   selector: 'app-consultation',
   standalone: true,
@@ -44,7 +57,9 @@ type FeatureKey = 'diagnosis' | 'orders' | 'records' | 'certificate' | 'consent'
     MatListModule,
     MatTabsModule,
     MatDividerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   templateUrl: './consultation.html',
   styleUrls: ['./consultation.scss']
@@ -52,6 +67,12 @@ type FeatureKey = 'diagnosis' | 'orders' | 'records' | 'certificate' | 'consent'
 export class ConsultationComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
+
+  @ViewChild('actionDialog') actionDialogTpl?: TemplateRef<ConsultationAction>;
+
+  private dialogRef: MatDialogRef<unknown> | null = null;
 
   private readonly featureList: ConsultationFeature[] = [
     {
@@ -86,6 +107,49 @@ export class ConsultationComponent {
     }
   ];
 
+  readonly consultationActions: ConsultationAction[] = [
+    {
+      id: 'followup',
+      title: '复诊预约',
+      icon: 'event_available',
+      description: '为患者安排下次复诊时间并同步至患者端提醒。',
+      highlights: ['智能推荐复诊时间段', '自动生成预约凭证并推送'],
+      primaryText: '确认预约'
+    },
+    {
+      id: 'referral',
+      title: '转诊',
+      icon: 'sync_alt',
+      description: '选择目标科室或上级医院，完成一键转诊申请。',
+      highlights: ['查看多学科会诊建议', '上传补充资料与影像'],
+      primaryText: '提交转诊'
+    },
+    {
+      id: 'finish',
+      title: '结束看诊',
+      icon: 'check_circle',
+      description: '核对医嘱与病历信息，确认结束本次看诊。',
+      highlights: ['确认医嘱与处方已同步', '自动推送随访计划至患者'],
+      primaryText: '结束看诊'
+    },
+    {
+      id: 'history',
+      title: '就诊记录',
+      icon: 'history',
+      description: '快速回顾患者历次就诊、检验与影像资料。',
+      highlights: ['时间轴查看历次诊疗', '一键比对关键检查指标'],
+      primaryText: '打开记录'
+    },
+    {
+      id: 'print',
+      title: '集中打印',
+      icon: 'print',
+      description: '选择需要打印的病历、处方和知情同意书，实现一键打印。',
+      highlights: ['支持批量生成PDF', '自动带入电子签名与盖章'],
+      primaryText: '生成打印包'
+    }
+  ];
+
   patient: PatientDetail | null = null;
   openTabs: ConsultationFeature[] = [];
   activeTabIndex = 0;
@@ -104,6 +168,25 @@ export class ConsultationComponent {
 
   goBack(): void {
     this.router.navigate(['/patients']);
+  }
+
+  openAction(action: ConsultationAction): void {
+    if (!this.actionDialogTpl) {
+      return;
+    }
+
+    this.dialogRef = this.dialog.open(this.actionDialogTpl, {
+      data: action,
+      width: '520px',
+      panelClass: 'consultation-action-dialog'
+    });
+  }
+
+  triggerAction(action: ConsultationAction): void {
+    this.snackBar.open(`${action.title}操作已记录，系统将继续处理。`, undefined, {
+      duration: 2600
+    });
+    this.dialogRef?.close();
   }
 
   openFeature(feature: ConsultationFeature): void {

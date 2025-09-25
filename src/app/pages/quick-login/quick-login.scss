@@ -1,0 +1,148 @@
+$primary: #1976d2;
+$primary-dark: #12426f;
+
+.quick-login-page {
+  min-height: 100vh;
+  padding: 48px 24px 64px;
+  background: linear-gradient(135deg, rgba(25, 118, 210, 0.08), rgba(18, 66, 111, 0.18));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  .quick-card {
+    width: min(720px, 100%);
+    border-radius: 28px;
+    padding: 32px 36px 36px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 24px 64px rgba(18, 66, 111, 0.2);
+    backdrop-filter: blur(6px);
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+
+      .title-block {
+        h1 {
+          margin: 0;
+          font-size: 26px;
+          font-weight: 600;
+          color: $primary-dark;
+        }
+
+        p {
+          margin: 8px 0 0;
+          color: rgba(18, 66, 111, 0.72);
+          font-size: 15px;
+          line-height: 1.6;
+        }
+      }
+
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        padding: 0 16px;
+        height: 42px;
+        border-color: rgba(25, 118, 210, 0.3);
+        color: $primary-dark;
+      }
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px 24px;
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      .form-actions {
+        grid-column: span 2;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+
+        button {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          border-radius: 14px;
+          padding: 0 20px;
+          height: 46px;
+        }
+
+        button:first-child {
+          box-shadow: 0 12px 30px rgba(25, 118, 210, 0.28);
+          font-weight: 600;
+        }
+      }
+    }
+
+    mat-divider {
+      margin: 28px 0 20px;
+    }
+
+    .tips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+
+      .tip-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: rgba(25, 118, 210, 0.1);
+        color: rgba(18, 66, 111, 0.78);
+
+        mat-icon {
+          font-size: 22px;
+          color: $primary;
+        }
+
+        p {
+          margin: 0;
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .quick-login-page {
+    padding: 32px 16px 48px;
+
+    .quick-card {
+      padding: 28px 22px 32px;
+
+      .card-header {
+        flex-direction: column;
+        align-items: stretch;
+
+        .back-button {
+          align-self: flex-end;
+        }
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+
+        .form-actions {
+          grid-column: span 1;
+
+          button {
+            flex: 1 1 160px;
+          }
+        }
+      }
+    }
+  }
+}
