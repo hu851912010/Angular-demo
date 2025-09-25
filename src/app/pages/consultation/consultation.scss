@@ -198,7 +198,7 @@ $text-strong: #1b3144;
         border-radius: 18px;
         margin: 6px 0;
         padding: 14px 16px;
-        min-height: 72px;
+        min-height: 64px;
         border: 1px solid rgba(18, 66, 111, 0.08);
         transition:
           background 0.25s ease,
@@ -230,10 +230,9 @@ $text-strong: #1b3144;
 
         .text-group {
           display: flex;
-          flex-direction: column;
-          gap: 4px;
-          align-items: flex-start;
+          align-items: center;
           flex: 1 1 auto;
+          min-width: 0;
         }
 
         div[matLine].title {
@@ -243,6 +242,8 @@ $text-strong: #1b3144;
           line-height: 1.4;
           color: $text-strong;
           transition: color 0.2s ease;
+          word-break: break-word;
+          white-space: normal;
         }
 
         .mat-mdc-list-item-meta,
@@ -272,12 +273,9 @@ $text-strong: #1b3144;
           }
         }
 
-        .description {
-          margin: 0;
-          font-size: 13px;
-          line-height: 1.6;
-          color: $text-muted;
-          letter-spacing: 0.2px;
+          mat-icon {
+            font-size: 22px;
+          }
         }
 
         .chevron {
@@ -294,11 +292,13 @@ $text-strong: #1b3144;
           transform: translateX(4px);
 
           div[matLine].title {
-            color: $secondary-color;
+            color: $primary-color;
           }
 
-          .description {
-            color: color.adjust($text-muted, $lightness: -8%);
+          .icon-wrap {
+            background: rgba(25, 118, 210, 0.16);
+            color: $primary-color;
+            box-shadow: 0 6px 14px rgba(25, 118, 210, 0.18);
           }
 
           .icon-wrap {
