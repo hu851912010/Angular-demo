@@ -22,67 +22,23 @@
       <mat-radio-button value="female">女</mat-radio-button>
     </mat-radio-group>
   </div>
-<mat-form-field appearance="outline">
- <mat-label>国籍</mat-label>
-
-  <!-- 可输入的文本框：用于搜索和显示 -->
-  <input
-    matInput
-    [formControl]="inputCtrl"
-    [matAutocomplete]="auto"
-    (blur)="onCountryBlurExactMatch()"
-    placeholder="输入中文/英文/代码搜索">
- <mat-error *ngIf="inputCtrl.hasError('invalidOption')">
-    输入无效，请从下拉列表中选择一个有效项
-  </mat-error>
-  <mat-autocomplete
-    #auto="matAutocomplete"
-     [displayWith]="displayCountry" 
-      [autoActiveFirstOption]="true"
-    (optionSelected)="pick($event.option.value) 
-    ">
-    @for (c of (filtered$ | async); track c.code) {
-      <mat-option [value]="c">
-        {{ c.name_cn }} ({{ c.code }}) — {{ c.name_en }}
-      </mat-option>
-    } @empty {
-      <mat-option disabled>无匹配结果</mat-option>
-    }
-  </mat-autocomplete>
-</mat-form-field>
+  <app-nationality-selector
+    formControlName="nationality"
+    [required]="true"
+    label="国籍"
+    placeholder="输入中文、英文或国家代码"
+  ></app-nationality-selector>
     <!-- 直接绑定到 formControlName="region" -->
     <app-region-selector
       formControlName="region"
       [required]="true">               <!-- 交给子组件做“至少选省”的必填校验 -->
     </app-region-selector>
-<mat-form-field appearance="outline">
-  
- <mat-label>民族</mat-label>
-
-  <!-- 可输入的文本框：用于搜索和显示 -->
-  <input
-    matInput
-    [formControl]="ethnicsInputCtrl"
-    [matAutocomplete]="ethnicAuto"
-    (blur)="onEthnicBlurExactMatch()"
-    placeholder="输入你的民族">
- <mat-error *ngIf="ethnicsInputCtrl.hasError('invalidOption')">
-    输入无效，请从下拉列表中选择一个有效项
-  </mat-error>
-  <mat-autocomplete
-    #ethnicAuto="matAutocomplete"
-     [displayWith]="displayEthnic" 
-      [autoActiveFirstOption]="true"
-    (optionSelected)="pickEthnic($event.option.value)">
-    @for (c of (filteredeEthnics$ | async); track c.code) {
-      <mat-option [value]="c">
-        {{ c.name }} ({{ c.name_py_first}})
-      </mat-option>
-    } @empty {
-      <mat-option disabled>无匹配结果</mat-option>
-    }
-  </mat-autocomplete>
-</mat-form-field>
+  <app-ethnic-selector
+    formControlName="ethnic"
+    [required]="true"
+    label="民族"
+    placeholder="请输入民族或拼音"
+  ></app-ethnic-selector>
   <!-- 下拉选择：科室 -->
   <mat-form-field appearance="outline">
     <mat-label>科室</mat-label>
@@ -159,5 +115,6 @@
 </form>
   </mat-card-content>
 
-<!-- 提交结果展示 -->
-<pre *ngIf="resultJson" class="result">{{ resultJson }}</pre>
+  <!-- 提交结果展示 -->
+  <pre *ngIf="resultJson" class="result">{{ resultJson }}</pre>
+</mat-card>
