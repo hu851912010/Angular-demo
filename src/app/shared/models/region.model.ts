@@ -3,4 +3,5 @@ export interface RegionValue {
   provinceCode: string;
   cityCode?: string;
   countyCode?: string;
+  detailAddress?: string;
 }
