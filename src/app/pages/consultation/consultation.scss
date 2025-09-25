@@ -186,11 +186,30 @@ $text-muted: #5c6b7c;
         color: $secondary-color;
       }
 
+      .mat-mdc-nav-list {
+        padding: 4px 12px 12px;
+      }
+
       .mat-mdc-nav-list .mat-mdc-list-item {
+        position: relative;
         border-radius: 16px;
-        margin: 6px 12px;
+        margin: 6px 0;
         padding: 12px;
+        min-height: 64px;
         transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        overflow: hidden;
+
+        .mdc-list-item__content {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .mat-mdc-list-item-meta,
+        .mdc-list-item__ripple,
+        .mat-mdc-focus-indicator {
+          border-radius: 16px;
+        }
 
         .mat-mdc-list-item-meta {
           margin: 0;
@@ -216,6 +235,10 @@ $text-muted: #5c6b7c;
           background: rgba(25, 118, 210, 0.12);
           box-shadow: inset 3px 0 0 $primary-color;
           transform: translateX(2px);
+
+          .description {
+            color: darken($text-muted, 8%);
+          }
         }
       }
     }
