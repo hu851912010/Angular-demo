@@ -1,0 +1,75 @@
+<section class="doctor-login-page">
+  <div class="background-glow"></div>
+  <mat-card class="login-card">
+    <div class="card-hero">
+      <div class="logo-circle">
+        <mat-icon>local_hospital</mat-icon>
+      </div>
+      <div class="hero-text">
+        <h1>医生工作站登录</h1>
+        <p>连接智能诊疗平台，随时掌握候诊患者动态。</p>
+      </div>
+    </div>
+
+    <mat-card-content>
+      <form class="form" [formGroup]="loginForm" (ngSubmit)="submit()">
+        <mat-form-field appearance="outline">
+          <mat-label>工号 / 手机号</mat-label>
+          <mat-icon matPrefix>badge</mat-icon>
+          <input matInput formControlName="username" placeholder="请输入账号信息" />
+          <mat-error *ngIf="loginForm.controls.username.hasError('required')">
+            请输入登录账号
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls.username.hasError('minlength')">
+            至少输入 3 个字符
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>登录密码</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" formControlName="password" placeholder="请输入密码" />
+          <mat-error *ngIf="loginForm.controls.password.hasError('required')">
+            密码不能为空
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls.password.hasError('minlength')">
+            至少输入 6 位密码
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-footer">
+          <mat-checkbox formControlName="remember">记住登录状态</mat-checkbox>
+          <button type="button" mat-button class="quick-link" (click)="navigateToQuickLogin()">
+            <mat-icon>bolt</mat-icon>
+            快速登录
+          </button>
+        </div>
+
+        <button mat-flat-button color="primary" class="submit" type="submit" [disabled]="isSubmitting">
+          <mat-icon>login</mat-icon>
+          登录平台
+        </button>
+
+        <button
+          mat-stroked-button
+          color="primary"
+          type="button"
+          class="secondary"
+          (click)="navigateToQuickLogin()"
+        >
+          <mat-icon>travel_explore</mat-icon>
+          使用访客通道
+        </button>
+      </form>
+
+      <mat-divider></mat-divider>
+
+      <ul class="tips">
+        <li *ngFor="let tip of hints">
+          <mat-icon>info</mat-icon>
+          <span>{{ tip }}</span>
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</section>

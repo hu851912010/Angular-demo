@@ -1,0 +1,78 @@
+<section class="quick-login-page">
+  <mat-card class="quick-card">
+    <header class="card-header">
+      <div class="title-block">
+        <h1>快速登录看诊工作台</h1>
+        <p>输入医生与患者信息即可直接进入对应的看诊界面。</p>
+      </div>
+      <button mat-stroked-button class="back-button" (click)="backToPatients()">
+        <mat-icon>arrow_back</mat-icon>
+        返回患者列表
+      </button>
+    </header>
+
+    <mat-card-content>
+      <form [formGroup]="quickForm" (ngSubmit)="submit()" class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>医生姓名</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput formControlName="doctor" placeholder="请输入医生姓名" />
+          <mat-error *ngIf="quickForm.controls.doctor.hasError('required')">请输入医生姓名</mat-error>
+          <mat-error *ngIf="quickForm.controls.doctor.hasError('minlength')">
+            至少输入 2 个字符
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>快速登录码</mat-label>
+          <mat-icon matPrefix>key</mat-icon>
+          <input matInput formControlName="accessCode" placeholder="输入四位数字" />
+          <mat-error *ngIf="quickForm.controls.accessCode.hasError('required')">
+            请填写快速登录码
+          </mat-error>
+          <mat-error *ngIf="quickForm.controls.accessCode.hasError('minlength')">
+            至少输入 4 位编码
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>患者卡号</mat-label>
+          <mat-icon matPrefix>badge</mat-icon>
+          <input matInput formControlName="patientId" placeholder="例如：P20241001" />
+          <mat-error *ngIf="quickForm.controls.patientId.invalid">请输入患者卡号</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>目标诊室</mat-label>
+          <mat-select formControlName="room">
+            <mat-option *ngFor="let room of rooms" [value]="room">{{ room }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-flat-button color="primary" type="submit">
+            <mat-icon>login</mat-icon>
+            一键进入
+          </button>
+          <button mat-stroked-button type="button" (click)="fillDemo()">
+            <mat-icon>auto_fix_high</mat-icon>
+            填入演示数据
+          </button>
+        </div>
+      </form>
+
+      <mat-divider></mat-divider>
+
+      <div class="tips">
+        <div class="tip-item">
+          <mat-icon>shield</mat-icon>
+          <p>系统会在后台校验登录码与排班信息，保障安全。</p>
+        </div>
+        <div class="tip-item">
+          <mat-icon>schedule</mat-icon>
+          <p>支持跨科室调取患者信息，方便多学科协作。</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

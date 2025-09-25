@@ -1,0 +1,167 @@
+$primary: #1976d2;
+$primary-dark: #12426f;
+
+.doctor-login-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: linear-gradient(120deg, rgba(25, 118, 210, 0.12), rgba(18, 66, 111, 0.22));
+  overflow: hidden;
+  box-sizing: border-box;
+  color: $primary-dark;
+
+  .background-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.55), transparent 55%),
+      radial-gradient(circle at bottom left, rgba(32, 117, 204, 0.25), transparent 60%);
+    filter: blur(4px);
+    pointer-events: none;
+  }
+
+  .login-card {
+    position: relative;
+    width: min(520px, 100%);
+    border-radius: 28px;
+    padding: 28px 32px 32px;
+    box-shadow: 0 28px 68px rgba(14, 51, 94, 0.18);
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.95);
+
+    .card-hero {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+
+      .logo-circle {
+        width: 64px;
+        height: 64px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #1f6fbb, #36a8ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 32px;
+        box-shadow: 0 12px 24px rgba(31, 111, 187, 0.35);
+      }
+
+      .hero-text {
+        h1 {
+          margin: 0;
+          font-size: 28px;
+          font-weight: 600;
+          color: $primary-dark;
+        }
+
+        p {
+          margin: 6px 0 0;
+          color: rgba(18, 66, 111, 0.7);
+          font-size: 15px;
+          line-height: 1.6;
+        }
+      }
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      .form-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+
+        .quick-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          padding: 0 8px;
+          color: $primary;
+        }
+      }
+
+      .submit {
+        height: 48px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 14px;
+        box-shadow: 0 10px 26px rgba(25, 118, 210, 0.28);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .secondary {
+        height: 46px;
+        border-radius: 14px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+    }
+
+    mat-divider {
+      margin: 24px 0 16px;
+    }
+
+    .tips {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: rgba(25, 118, 210, 0.08);
+        border-radius: 14px;
+        padding: 12px 14px;
+        color: rgba(18, 66, 111, 0.8);
+
+        mat-icon {
+          font-size: 20px;
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .doctor-login-page {
+    padding: 32px 16px;
+
+    .login-card {
+      padding: 24px 22px 28px;
+
+      .card-hero {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .form {
+        .submit,
+        .secondary {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
