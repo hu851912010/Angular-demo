@@ -4,6 +4,7 @@ $primary-color: #1976d2;
 $secondary-color: #12426f;
 $surface-color: #f5f8ff;
 $text-muted: #5c6b7c;
+$text-strong: #1b3144;
 
 .consultation-page {
   min-height: 100vh;
@@ -238,8 +239,8 @@ $text-muted: #5c6b7c;
           font-weight: 600;
           font-size: 15px;
           letter-spacing: 0.3px;
-          line-height: 1.5;
-          color: #1b3144;
+          line-height: 1.4;
+          color: $text-strong;
           transition: color 0.2s ease;
           word-break: break-word;
           white-space: normal;
@@ -262,10 +263,15 @@ $text-muted: #5c6b7c;
           width: 46px;
           height: 46px;
           border-radius: 16px;
-          background: rgba(25, 118, 210, 0.08);
-          color: $primary-color;
+          background: rgba(27, 49, 68, 0.08);
+          color: $text-strong;
           flex-shrink: 0;
           transition: background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease;
+
+          mat-icon {
+            font-size: 22px;
+          }
+        }
 
           mat-icon {
             font-size: 22px;
@@ -292,6 +298,12 @@ $text-muted: #5c6b7c;
           .icon-wrap {
             background: rgba(25, 118, 210, 0.16);
             color: $primary-color;
+            box-shadow: 0 6px 14px rgba(25, 118, 210, 0.18);
+          }
+
+          .icon-wrap {
+            background: rgba(25, 118, 210, 0.16);
+            color: $secondary-color;
             box-shadow: 0 6px 14px rgba(25, 118, 210, 0.18);
           }
 
