@@ -60,18 +60,20 @@ export class ConsultationComponent {
       icon: 'medical_information',
       description: '记录主诉与诊断结论'
     },
+      {
+      id: 'records',
+      title: '病历',
+      icon: 'description',
+      description: '查看及补充病历信息'
+    },
+    
     {
       id: 'orders',
       title: '医嘱',
       icon: 'medication',
       description: '开立处方与医技检查'
     },
-    {
-      id: 'records',
-      title: '病历',
-      icon: 'description',
-      description: '查看及补充病历信息'
-    },
+ 
     {
       id: 'certificate',
       title: '疾病证明',
