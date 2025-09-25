@@ -213,10 +213,12 @@ $text-muted: #5c6b7c;
           z-index: -1;
         }
 
+
         .mdc-list-item__content {
           display: flex;
           align-items: center;
           gap: 12px;
+
           position: relative;
           z-index: 1;
         }
@@ -225,6 +227,7 @@ $text-muted: #5c6b7c;
           font-weight: 600;
           color: #1b3144;
           transition: color 0.2s ease;
+
         }
 
         .mat-mdc-list-item-meta,
@@ -263,6 +266,7 @@ $text-muted: #5c6b7c;
         &.active,
         &:hover,
         &:focus {
+
           transform: translateX(4px);
 
           &::before {
@@ -296,6 +300,7 @@ $text-muted: #5c6b7c;
 
           .chevron {
             transform: translateX(2px);
+
           }
         }
       }
