@@ -1,13 +1,29 @@
 <section class="consultation-page" *ngIf="patient as current">
   <header class="page-header">
-    <button mat-stroked-button class="back-button" (click)="goBack()">
-      <mat-icon>arrow_back</mat-icon>
-      返回患者列表
-    </button>
-    <div class="header-info">
-      <h1>{{ current.name }}的看诊工作台</h1>
-      <p class="subtitle">请在左侧选择功能，右侧查看或录入详细信息</p>
+    <div class="header-main">
+      <button mat-stroked-button class="back-button" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        返回患者列表
+      </button>
+      <div class="header-info">
+        <h1>{{ current.name }}的看诊工作台</h1>
+        <p class="subtitle">请在左侧选择功能，右侧查看或录入详细信息</p>
+      </div>
     </div>
+
+    <nav class="header-actions" aria-label="常用功能菜单">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="action-button"
+        *ngFor="let action of consultationActions"
+        (click)="openAction(action)"
+        matTooltip="{{ action.description }}"
+      >
+        <mat-icon>{{ action.icon }}</mat-icon>
+        <span>{{ action.title }}</span>
+      </button>
+    </nav>
   </header>
 
   <section class="workspace">
@@ -177,6 +193,30 @@
           </mat-tab>
         </mat-tab-group>
       </mat-card>
-    </section>
-  </section>
+</section>
+
+<ng-template #actionDialog let-data>
+  <h2 mat-dialog-title>
+    <mat-icon>{{ data.icon }}</mat-icon>
+    {{ data.title }}
+  </h2>
+
+  <mat-dialog-content class="action-dialog-content">
+    <p class="description">{{ data.description }}</p>
+    <ul class="highlight-list">
+      <li *ngFor="let item of data.highlights">
+        <mat-icon>check_circle</mat-icon>
+        <span>{{ item }}</span>
+      </li>
+    </ul>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="action-dialog-footer">
+    <button mat-button mat-dialog-close>稍后处理</button>
+    <button mat-flat-button color="primary" (click)="triggerAction(data)">
+      {{ data.primaryText }}
+    </button>
+  </mat-dialog-actions>
+</ng-template>
+</section>
 </section>
