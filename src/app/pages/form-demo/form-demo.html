@@ -22,6 +22,22 @@
       <mat-radio-button value="female">女</mat-radio-button>
     </mat-radio-group>
   </div>
+    <!-- 日期选择：生日 -->
+  <mat-form-field appearance="outline">
+    <mat-label>出生日期</mat-label>
+    <input matInput [matDatepicker]="picker" placeholder="选择日期" formControlName="birthday">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="submitted && form.controls.birthday.invalid">请选择日期</mat-error>
+  </mat-form-field>
+
+  <!-- 手机号 -->
+  <mat-form-field appearance="outline">
+    <mat-label>手机号</mat-label>
+    <input matInput placeholder="可选项" formControlName="phone">
+    <mat-hint align="end">示例：13800001234</mat-hint>
+    <mat-error *ngIf="submitted && form.controls.phone.invalid">手机号格式不正确</mat-error>
+  </mat-form-field>
   <app-nationality-selector
     formControlName="nationality"
     [required]="true"
@@ -42,29 +58,14 @@
 
   <!-- 下拉选择：科室 -->
   <mat-form-field appearance="outline">
-    <mat-label>科室</mat-label>
+    <mat-label>就诊科室</mat-label>
     <mat-select formControlName="dept">
       <mat-option *ngFor="let d of depts" [value]="d">{{ d }}</mat-option>
     </mat-select>
     <mat-error *ngIf="submitted && form.controls.dept.invalid">请选择科室</mat-error>
   </mat-form-field>
 
-  <!-- 日期选择：生日 -->
-  <mat-form-field appearance="outline">
-    <mat-label>出生日期</mat-label>
-    <input matInput [matDatepicker]="picker" placeholder="选择日期" formControlName="birthday">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="submitted && form.controls.birthday.invalid">请选择日期</mat-error>
-  </mat-form-field>
 
-  <!-- 手机号 -->
-  <mat-form-field appearance="outline">
-    <mat-label>手机号</mat-label>
-    <input matInput placeholder="可选项" formControlName="phone">
-    <mat-hint align="end">示例：13800001234</mat-hint>
-    <mat-error *ngIf="submitted && form.controls.phone.invalid">手机号格式不正确</mat-error>
-  </mat-form-field>
 
   <!-- 自动完成（标签） -->
   <mat-form-field appearance="outline">

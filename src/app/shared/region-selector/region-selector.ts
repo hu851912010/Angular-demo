@@ -83,13 +83,12 @@ export { RegionValue };
       padding: 20px;
       border-radius: 16px;
       border: 1px solid #d0d7de;
-      background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
       box-shadow: 0 6px 18px rgba(25, 118, 210, 0.08);
     }`,
     `.group-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #1976d2;
+      font-size: 16px;
+      font-weight: 400;
+     
       display: flex;
       align-items: center;
       gap: 8px;
