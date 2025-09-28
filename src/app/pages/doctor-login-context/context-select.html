@@ -1,0 +1,58 @@
+<div class="context-layout">
+  <mat-card class="context-card">
+    <mat-card-header>
+      <div mat-card-avatar class="brand-avatar">H</div>
+      <mat-card-title>{{ doctorName }}医生，选择工作场景</mat-card-title>
+      <mat-card-subtitle>系统将根据权限提供匹配入口</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="contextForm" (ngSubmit)="submit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>选择系统</mat-label>
+          <mat-select formControlName="system" (selectionChange)="onSystemChanged($event.value)">
+            <mat-option *ngFor="let system of systemOptions" [value]="system.value">
+              <div class="option-title">{{ system.label }}</div>
+              <div class="option-desc">{{ system.description }}</div>
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="contextForm.controls.system.invalid">请选择系统</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>选择院区</mat-label>
+          <mat-select formControlName="campus" (selectionChange)="onCampusChanged($event.value)">
+            <mat-option *ngFor="let campus of campusOptions" [value]="campus.value">{{ campus.label }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="contextForm.controls.campus.invalid">请选择院区</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>选择科室</mat-label>
+          <mat-select formControlName="department">
+            <mat-option *ngFor="let dept of departmentOptions" [value]="dept.value">{{ dept.label }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="contextForm.controls.department.invalid">请选择科室</mat-error>
+        </mat-form-field>
+
+        <div class="remember-tip" *ngIf="rememberMe">已为您保留账号信息，无需重复输入。</div>
+
+        <button mat-flat-button color="primary" class="submit-btn" [disabled]="isSubmitting" type="submit">
+          {{ isSubmitting ? '加载中…' : '进入系统' }}
+        </button>
+      </form>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-footer>
+      <div class="hint-title">温馨提示</div>
+      <ul>
+        <li *ngFor="let hint of hints">{{ hint }}</li>
+      </ul>
+      <div class="back-action">
+        <button mat-stroked-button color="accent" (click)="backToLogin()">返回重新登录</button>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>
