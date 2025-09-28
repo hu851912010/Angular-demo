@@ -38,6 +38,24 @@
     <mat-hint align="end">示例：13800001234</mat-hint>
     <mat-error *ngIf="submitted && form.controls.phone.invalid">手机号格式不正确</mat-error>
   </mat-form-field>
+
+  <!-- 文本输入：就诊卡号 -->
+  <mat-form-field appearance="outline">
+    <mat-label>就诊卡号</mat-label>
+    <input
+      matInput
+      placeholder="请输入 8-12 位数字就诊卡号"
+      formControlName="medicalCardNo"
+      maxlength="12"
+    >
+    <mat-hint align="end">例如：20240001</mat-hint>
+    <mat-error *ngIf="submitted && form.controls.medicalCardNo.errors?.['required']">
+      就诊卡号为必填项
+    </mat-error>
+    <mat-error *ngIf="submitted && form.controls.medicalCardNo.errors?.['pattern']">
+      请输入 8-12 位数字的就诊卡号
+    </mat-error>
+  </mat-form-field>
   <app-nationality-selector
     formControlName="nationality"
     [required]="true"
