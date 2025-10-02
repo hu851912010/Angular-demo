@@ -13,7 +13,6 @@
           <mat-select formControlName="system" (selectionChange)="onSystemChanged($event.value)">
             <mat-option *ngFor="let system of systemOptions" [value]="system.value">
               <div class="option-title">{{ system.label }}</div>
-              <div class="option-desc">{{ system.description }}</div>
             </mat-option>
           </mat-select>
           <mat-error *ngIf="contextForm.controls.system.invalid">请选择系统</mat-error>
